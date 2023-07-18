@@ -47,7 +47,7 @@ GameManager.prototype.setup = function () {
 
   
   var highScoreOnksqlDB = 0;
-  loadHighestScore(storageManager.getGameName(), storageManager.getUsername(), this, function(hs,ctx) {
+  loadHighestScore(storageManager.getGameName(), storageManager.getUsername(), function(hs,ctx) {
     //var localHighscore = ctx.storageManager.getBestScore();
     highScoreOnksqlDB= hs || 0;
     ctx.storageManager.setBestScore(highScoreOnksqlDB);
@@ -106,6 +106,12 @@ GameManager.prototype.actuate = function () {
   if (this.storageManager.getBestScore() < this.score) {
     this.storageManager.setBestScore(this.score);
   }
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const user = urlParams.get('user');
+  console.log(user);
+  this.storageManager.setUsername(user);
 
   // Clear the state when the game is over (game over only, not win)
   if (this.over) {

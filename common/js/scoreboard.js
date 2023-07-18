@@ -1,9 +1,11 @@
 function fillScoreboardPage(storageManager) {
-	var playersScores= storageManager.getPlayersScores();
-	if(typeof playersScores !== 'undefined'){
-		var headers = ["Rank","Name", "Score", "Losses"];
-		document.getElementById('scoreboard').innerHTML = json2table(playersScores, 'table', headers);
-	}
+	console.log('hnnn');
+	var playersScores= getScoreboardJson('gamename', function(playersScores) {
+		if(typeof playersScores !== 'undefined'){
+			var headers = ["Rank","Name", "Score", "Losses"];
+			document.getElementById('scoreboard').innerHTML = json2table(playersScores, 'table', headers);
+		}
+	});
 }
 
 function loadScoreboard(storageManager) {

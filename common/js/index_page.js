@@ -28,23 +28,19 @@ function play() {
     }
     if (!selected_game) {
         //Using a default to let people play a game if the input doesn't show up...
-        selected_game = GAMES_LIST[0];
+        selected_game = "2048";
         /*alert('You need to select a game.');
         return;*/
     }
     localStoreManager.setUsername(user);
     localStoreManager.setGameName(selected_game);
-    window.location.href = selected_game+"/index.html";
+    window.location.href = "../games/"+selected_game+"/index.html"+"?user="+user;
 }
 
 function createGameSelector() {
     var htmlCode=""
    
-    if (GAMES_LIST == '') {
-        alert('Error, games list empty');
-        return;
-    }
-    var json = GAMES_LIST;
+    var json = ["2048"];
 
     json.forEach((row, index) => {
         htmlCode += '<div class"gameSelectorOpt">';
